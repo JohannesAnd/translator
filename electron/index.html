@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+</head>
+
+<body>
+  <div id="root" style="height: 100%;"></div>
+  <script>
+    (function () {
+      const app = document.createElement('script');
+      app.src = process.env.NODE_ENV !== 'development' ? './build/bundle.js' : 'http://localhost:8080/bundle.js';
+      document.body.appendChild(app);
+    }());
+  </script>
+  <script>
+    document.addEventListener("keydown", function (e) {
+      if (e.which === 116) {
+        location.reload();
+      }
+    });
+  </script>
+  <script>
+    require('./renderer')
+  </script>
+</body>
+
+</html>

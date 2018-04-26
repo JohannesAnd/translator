@@ -1,0 +1,37 @@
+{
+  "name": "LanguageEdit",
+  "version": "0.0.1",
+  "description": "A language editor",
+  "main": "main.js",
+  "scripts": {
+    "start": "concurrently -k \"cross-env NODE_ENV=development npm run webpack-dev\" \"cross-env NODE_ENV=development npm run electron\"",
+    "electron": "electron ./electron/main.js",
+    "webpack-dev": "webpack-dev-server"
+  },
+  "author": "Johannes Andersen",
+  "license": "ISC",
+  "dependencies": {
+    "@cerebral/react": "^3.2.2",
+    "bufferutil": "^3.0.4",
+    "cerebral": "^4.2.2",
+    "electron": "^1.8.4",
+    "prettier": "^1.12.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "styled-components": "^3.2.6",
+    "utf-8-validate": "^4.0.1",
+    "write": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
+    "cross-env": "^5.1.4",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
