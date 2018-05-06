@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Language = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 10px;
   &:nth-child(even) {
     background-color: lightgray;
@@ -24,4 +25,8 @@ export const Translation = styled.p``;
 
 export const Header = styled.h2`
   text-align: center;
+`;
+
+export const Edit = styled.button`
+  align-self: center;
 `;

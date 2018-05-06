@@ -8,14 +8,19 @@ export default Module({
     content: '',
     selectedKey: '',
     filtered: false,
-    textFilter: ''
+    textFilter: '',
+    editKey: null,
+    editLanguage: null
   },
   signals: {
     setContent: sequences.setContent,
     keyClicked: sequences.keyClicked,
     filterClicked: sequences.filterClicked,
     sendContent: sequences.sendContent,
-    textFilterChanged: sequences.textFilterChanged
+    textFilterChanged: sequences.textFilterChanged,
+    editClicked: sequences.editClicked,
+    editSaveClicked: sequences.editSaveClicked,
+    set: sequences.setValue
   },
   modules: {},
   providers: {},

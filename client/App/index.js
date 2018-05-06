@@ -14,6 +14,8 @@ import {
   H3
 } from './elements';
 
+import EditModal from './EditModal';
+
 export default connect(
   {
     content: state`content`,
@@ -34,6 +36,7 @@ export default connect(
     render() {
       return (
         <div>
+          <EditModal />
           <HeaderWrapper>
             <h1>{'Key overview'}</h1>
             <H3>{this.props.filename}</H3>

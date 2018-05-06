@@ -9,25 +9,35 @@ import {
   Language,
   LanguageCode,
   Translation,
-  Header
+  Header,
+  Edit
 } from './elements';
 
 export default connect(
   {
+    selectedKey: state`selectedKey`,
+    editClicked: signal`editClicked`,
     translations: computeTranslations
   },
-  function App({ className, translations }) {
+  function App({ className, translations, selectedKey, editClicked }) {
     return (
       <Wrapper>
         <Header>{'Translations'}</Header>
         {translations.map(({ language, translation }) => (
-          <Language
-            key={language}
-            color={'black'}
-            onClick={() => keyClicked({ key })}
-          >
+          <Language key={language} color={'black'}>
             <LanguageCode valid={translation}>{language}</LanguageCode>
             <Translation>{translation}</Translation>
+            <Edit
+              onClick={() =>
+                editClicked({
+                  selectedKey,
+                  language,
+                  hasText: Boolean(translation)
+                })
+              }
+            >
+              {'Edit'}
+            </Edit>
           </Language>
         ))}
       </Wrapper>
