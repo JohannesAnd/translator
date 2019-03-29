@@ -14,35 +14,32 @@ module.exports = function printContent(filename, content) {
     return a;
   }, '');
 
-  Promise.all([
-    write.promise(filename, prettier.format(exp + '{' + indexContent + '};')),
+  // Write index.js
+  write.promise(`${foldername}/index.js`, prettier.format(exp + '{' + indexContent + '};'));
 
-    ...languages.map(language => {
-      const keys = Object.keys(parsed[language]);
-      const indexContent = keys.reduce((a, k) => {
-        a += `${k}: require("./${language}/${k}.js"),`;
+  // Write language folders
+  languages.map(language => {
+    const data = parsed[language];
 
-        return a;
-      }, '');
+    const indexData = Object.assign({}, data, {
+      phrases: Object.keys(data.phrases).reduce((reqs, phraseKey) => {
+        reqs[phraseKey] = `require('./${phraseKey}')`
 
-      return Promise.all([
-        ...keys.map(key => {
-          return write.promise(
-            `${foldername}/${language}/${key}.js`,
-            prettier.format(exp + JSON.stringify(parsed[language][key]))
-          );
-        }),
-        write.promise(
-          `${foldername}/${language}/index.js`,
-          prettier.format(exp + '{' + indexContent + '};')
-        )
-      ]);
+        return reqs;
+      }, {})
     })
-  ])
-    .then(res => {
-      console.log('written to files');
+
+    write(
+      `${foldername}/${language}/index.js`,
+      prettier.format(exp + JSON.stringify(indexData).replace(/"require\(/g, 'require(').replace(/\)"/g, ')'))
+    );
+
+    Object.keys(data.phrases).map(phraseKey => {
+      write(`${foldername}/${language}/${phraseKey}.js`, prettier.format(exp + JSON.stringify(data.phrases[phraseKey])));
     })
-    .catch(err => {
-      console.log(error);
-    });
+  });
+
+  // Write page folders
+
+  // Write content to individual files
 };

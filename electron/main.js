@@ -62,7 +62,6 @@ function createWindow() {
                 filename => {
                   mainWindow.webContents.send('file-saved');
                   ipcMain.on('file-content', (event, content) => {
-                    console.log('got content', content);
                     printContent(filename, content);
                   });
                 }
